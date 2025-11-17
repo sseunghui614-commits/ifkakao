@@ -63,12 +63,14 @@ const currentGoto = (time)=>{
 //prev 버튼을 클릭했을 때
 const prevBtn = document.querySelector('.prev');
 prevBtn.addEventListener('click',()=>{
+    disablebButtons();
     current--;
     currentGoto('0.5s');
 });
 //next 버튼을 클릭했을 떄
 const nextbtn=document.querySelector('.next');
 nextbtn.addEventListener('click',()=>{
+    disablebButtons();
     current++;
     currentGoto('0.5s');
 });
