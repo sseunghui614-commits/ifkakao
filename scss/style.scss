@@ -1,0 +1,220 @@
+@charset 'utf-8';
+@use 'reset';
+@use 'font';
+@use 'variables' as *;
+@use 'mixin' as mixin;
+html{
+  font-size: 10px;
+  @include mixin.respond{
+    font-size: 16px;
+  }
+}
+//header 영역
+header{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+nav{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+  padding: 1rem;
+  //모바일 기본 메뉴
+  .base{
+    @include mixin.flex-layout(row,space-between,center);
+    //데스크탑 사이즈가 되면 보이지 않아야 함
+    @include mixin.respond{
+      display: none;
+    }
+  }
+  //로고
+  p{
+    font-size: 30px;
+  font-weight: 700;
+  color: $gray-900;}
+  div.menubtn{
+    width: 32px;
+    height: 32px;
+    background-color: $gray-900;
+    border-radius: $radius-ss;
+    @include mixin.flex-center(column);
+    gap:5px;
+    cursor: pointer;
+    span{
+      display: block;
+      width: 70%;
+      height: 3px;
+      border-radius: 3px;
+      background-color: $white;
+      }
+    }
+  div.popup{
+    display: none;
+    @include mixin.respond{
+      display: block;
+      @include mixin.flex-layout(row,space-between,center);
+      height: auto;
+      padding: 1.5rem;
+    }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(50px);
+    padding: 1rem;
+    .popup-top{
+      @include mixin.flex-layout(row,space-between,center);
+      .menu-close{
+        color: $white;
+        font-size: 2rem;
+        font-weight: 700;
+        gap:0;
+        @include mixin.respond{display: none;}
+      }
+    }
+  }
+  .popup-menu{
+    background-color: $gray-900;
+    color: $white;
+    border-radius: $radius-ss;
+    margin: 1rem 0;
+    @include mixin.respond{
+      @include mixin.flex-center(row);
+      margin: 0;
+    }
+    li{
+      border-bottom: 0.5px solid $gray-700;
+      padding: 2rem;
+      @include mixin.respond{
+        border: none;
+        padding: 0.5rem 2rem;
+      }
+      a{
+        font-size: $font-h2;
+        @include mixin.respond{
+          font-size: $font-BL;
+        }
+        &:hover{
+          color: $gray-700;
+        }
+      }
+      &:last-child{
+        border: none;
+      }
+    }
+  }
+  .login{
+    background-color: $gray-900;
+    color: $white;
+    border-radius: $radius-ss;
+    padding: 2rem;
+    font-size: $font-h2;
+    @include mixin.respond{
+      background: none;  //백그라운드 속성 자체를 없애기
+      background-color: transparent; //색상투명
+      color: $gray-900;
+              @include mixin.respond{
+          font-size: $font-BL;
+          padding: 0.5rem 1rem;
+        }
+    }
+  }
+}
+div.video_box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  video{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+}
+/**main**/
+main{
+  padding: 3rem;
+  .sec-title{
+    @include mixin.text-style(display);
+  }
+  .sec-desc{
+    @include mixin.text-style(title);
+    color: $gray-700;
+    margin: 2rem 0
+  }
+  .sec-sub{
+    @include mixin.text-style(display);
+    color: $gray-700;
+  }
+  .btn-wrap{
+    @include mixin.flex-center;
+    margin: 1rem 0;
+    div{
+      width: 48px;
+      height: 48px;
+      @include mixin.btn-circle-arrow;
+      font-size: 36px;
+    }
+  }
+  //이미지 슬라이드 공통 항목
+  .slide-wrap{
+    .slide-view{
+      background-color: #ddd;
+      aspect-ratio: 4/5;
+      @include mixin.respond{
+        aspect-ratio: 15/7;
+      }
+      position: relative;
+      border-radius: $radius-xl;
+      overflow: hidden;
+      .slide-list{
+        @include mixin.flex-layout(row,flex-start,center,0);
+        height: 100%;
+        transition: 0.5s;
+        li{
+          height: 100%;
+          img{
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+      }
+      .indicator{
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        @include mixin.flex-center;
+        li{
+          cursor: pointer;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: rgba(255,255,255,0.6);
+        }
+        li.active{
+          background-color: $white;
+        }
+      }
+    }
+  }
+}
+#section-1{}
+#section-2{}
+#section-3{}
+#section-4{}
+#section-5{}
+#section-6{}
+#section-7{}
+/**footer**/
+footer{}
+#foot-menu{}
+#foot-ani{}

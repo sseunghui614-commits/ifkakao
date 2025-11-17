@@ -1,0 +1,99 @@
+@use 'variables' as *;
+
+//기본 레이아웃을 모바일 우선으로 설정.
+@mixin respond{
+  @media all and (min-width:768px) {
+    @content;
+  }
+}
+
+//폰트 스타일 변경시 공통 사용
+@mixin font-style($size,$weight:400){
+  font-size: $size;
+  font-weight: $weight;
+}
+
+//텍스트 스타일 사용
+@mixin text-style($name){
+  @if $name == display {
+    @include font-style($font-display,800);
+  } @else if $name == heading-1 {
+    @include font-style($font-h1,700);
+  } @else if $name == heading-2 {
+    @include font-style($font-h2,600);
+  } @else if $name == title {
+    @include font-style($font-title,500);
+  } @else if $name == body-large {
+    @include font-style($font-BL,400);
+  } @else if $name == body-medium {
+    @include font-style($font-BM,400);
+  } @else {
+    @include font-style($font-caption,400);
+  }
+}
+
+//@flex 믹스인 
+@mixin flex-layout(
+  $dir:row,
+  $justify: flex-start,
+  $align: stretch,
+  $gap: 1rem
+){
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+@mixin flex-center($dir:row){
+  @include flex-layout($dir,center,center);
+}
+
+//버튼 컴포넌트
+@mixin button-theme(
+  $color:$black, 
+  $bg:$white, 
+  $hover-bg: $gray-500,
+  $hover-text: $black,
+  $status: null
+){
+  display: inline-block;
+  color: $color;
+  background-color: $bg;
+  border: none;
+
+  //원형의 버튼을 만들기 위해서 추가
+  @if $status == 'circle'{
+    border-radius: 50%;
+    @include flex-center();
+  } @else{
+    border-radius: $radius-md;  
+    padding: 0.75rem 2rem;
+  }  
+
+  cursor: pointer;
+  transition: 0.3s;
+  @include text-style(body-large);
+  &:hover{
+    background-color: $hover-bg;
+    color: $hover-text;
+  }
+  @include respond{
+    border-radius: $radius-xl;
+  }
+}
+@mixin btn-base-black{
+  @include button-theme($white,$black,$gray-500,$white);
+}
+@mixin btn-base-yellow{
+  @include button-theme($black,$brand-yellow,$brand-hover,$black);
+}
+@mixin btn-circle-black{
+    @include button-theme($white,$black,$gray-500,$white,'circle');
+}
+@mixin btn-circle-yellow{
+  @include button-theme($black,$brand-yellow,$brand-hover,$black,'circle');
+}
+@mixin btn-circle-arrow{
+  @include button-theme($gray-500, $white , $gray-200, $gray-500, 'circle');
+}
