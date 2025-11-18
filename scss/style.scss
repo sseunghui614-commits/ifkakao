@@ -4,7 +4,7 @@
 @use 'variables' as *;
 @use 'mixin' as mixin;
 html{
-  font-size: 10px;
+  font-size: 12px;
   @include mixin.respond{
     font-size: 16px;
   }
@@ -141,6 +141,15 @@ div.video_box{
 /**main**/
 main{
   padding: 3rem;
+  @include mixin.respond{
+    padding: 5rem;
+  }
+  section{
+    margin: 5rem 0;
+      h2{
+    margin-bottom: 2rem;
+  }
+  }
   .sec-title{
     @include mixin.text-style(display);
   }
@@ -208,13 +217,257 @@ main{
   }
 }
 #section-1{}
-#section-2{}
+#section-2{
+  overflow: hidden;
+  .card-list{
+    margin: 3rem 0;
+    width: 900px;
+    @include mixin.flex-layout(row, flex-start, flex-start);
+    @include mixin.respond{
+      width: 100%;
+      justify-content: space-between;}
+    li{
+      width: 300px;
+      @include mixin.respond{
+        width:30%;
+      }
+      .imgWrap{
+        aspect-ratio: 1/1;
+        background-size: cover;
+        border-radius: $radius-md;
+        overflow: hidden;
+        p{
+          @include mixin.text-style(display);
+          width: 100%;
+          height: 100%;
+          @include mixin.flex-center;
+          transition: 0.3s;
+          &:hover{
+            background-color: rgba(255,255,255,0.2);
+            backdrop-filter: blur(50px);
+            color: $white;
+          }
+        }
+      }
+      .txtWrap{
+        width: 100%;
+        @include mixin.respond{
+          width: 80%;
+        }
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        h3{
+          @include mixin.text-style(title);
+          margin: 0.5rem 0;
+        }
+        p{
+          @include mixin.text-style(body-large);
+          color: $gray-500;
+          margin: 0.5rem 0;
+        }
+      }
+    }
+    li:nth-child(1){
+      .imgWrap{
+        background-color: $card-yellow;
+        background-image: url(../assets/images/imgi_51_img_graphic_day1.png);}
+    }
+    li:nth-child(2){
+      .imgWrap{
+        background-color: $card-blue;
+        background-image: url(../assets/images/imgi_52_img_graphic_day2.png);}
+    }
+    li:nth-child(3){
+      .imgWrap{
+        background-color: $card-puple;
+        background-image: url(../assets/images/imgi_53_img_graphic_krewday.png);}
+    }
+  }
+}
 #section-3{}
-#section-4{}
-#section-5{}
-#section-6{}
-#section-7{}
+#section-4{
+  .map{
+    margin: 2rem 0;
+    // height: 80vh;
+    @include mixin.flex-layout(column-reverse, flex-start, stretch);
+    @include mixin.respond{
+      flex-direction: row;
+    }
+    .txt{
+      flex: 1;
+      background-color: $brand-yellow;
+      border-radius: $radius-xl;
+      padding: 2rem;
+      .title{margin-bottom: 6rem;}
+      *{margin: 1rem 0}
+      p{
+        @include mixin.text-style(title);
+      }
+      h3{
+        @include mixin.text-style(heading-2);
+      }
+      p.btn{
+        @include mixin.btn-base-black;
+      }
+    }
+    img{
+      flex: 1;
+      aspect-ratio: 3/2;
+      @include mixin.respond{
+        // aspect-ratio: 1/1;
+        width: 50%;
+      }
+    }
+  }
+}
+#section-5{
+    ul.top{
+      margin: 2rem 0;
+      @include mixin.flex-layout(row, flex-start, center);
+      li{
+        cursor: pointer;
+        @include mixin.text-style(title); 
+        color: $gray-500;
+      }
+      li.active{
+        color: $gray-900;
+      }
+    }
+    div.tabitem{
+      position: relative;
+      min-height: 90vh;
+      ul.item{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+      ul.active{
+        display: block;
+      }
+      li{
+        cursor: pointer;
+        padding: 1rem 0;
+        border-top: 1px solid $gray-200;
+        &:last-child{
+          border-bottom: 1px solid $gray-200;
+        }
+      }
+      li.show .a{
+        display: block;
+      }
+      li.show .q p:last-child{@include mixin.btn-circle-yellow;}
+      p{
+        @include mixin.text-style(body-large);
+      }
+      .q{
+        @include mixin.flex-layout(row,space-between,center);
+        margin: 1rem 0;
+        p:first-child{
+          flex: 1;
+        }
+        p:last-child{
+          width: 20px;
+          height: 20px;
+          @include mixin.btn-circle-black;
+        }
+      }
+      .a{
+        @include mixin.text-style(body-medium);
+        color: $gray-700;
+        display: none;
+      }
+      
+    }
+}
+#section-6{
+  position: relative;
+  min-height: 450px;
+  @include mixin.respond{
+    margin: 3rem 0;
+    position: static;
+    min-height: auto;
+    @include mixin.flex-layout(row, space-between, center);
+  }
+  > *{
+    position: absolute;
+    left: 0;
+    @include mixin.respond{
+      position: static;
+    }
+  }
+  .txt{
+    z-index: 3;
+    top: -3rem;
+    width: 70%;
+    @include mixin.respond{
+      width: 50%;
+    }
+    p:first-child{
+      margin: 2rem 0;
+      @include mixin.text-style(heading-2);
+    }
+    .btn{
+      @include mixin.btn-base-black;
+    }
+  }
+  img{
+    top: 3rem;
+    @include mixin.respond{
+      width: 50%;
+    }
+  }
+}
+#section-7{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  @include mixin.respond{
+    grid-template-columns: repeat(5,1fr);
+  }
+}
 /**footer**/
-footer{}
-#foot-menu{}
-#foot-ani{}
+footer{
+  background-color: $black;
+  padding: 3rem;
+  color: $white;
+}
+#foot-menu{
+  @include mixin.flex-layout(row, space-between, flex-start);
+  ul{
+    @include mixin.flex-layout(column);
+    @include mixin.text-style(body-medium);
+    @include mixin.respond{
+      flex-direction: row;
+    }
+  }
+  .btn{
+    width: 48px;
+    height: 48px;
+    @include mixin.btn-circle-arrow;
+    font-size: $font-h2;
+  }
+}
+#foot-ani{
+  overflow: hidden;
+  margin-top: 30vh;
+  span{
+    font-size: 100px;
+  }
+  img{
+    display: inline-block;
+    width: 180px;
+  }
+  .track{
+    @include mixin.flex-layout(row);
+    white-space: nowrap;
+    width: 250%;
+    animation: marquee 10s linear infinite;
+    div{flex: 1;}
+  }
+}
+@keyframes marquee{
+  0%{ transform: translateX(0);}
+  100%{ transform: translateX(-50%);}
+}
